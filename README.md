@@ -8,8 +8,8 @@
     <img src="https://img.shields.io/github/stars/canaria3406/skport-auto-sign?style=flat-square" alt="">
 </p>
 
-A lightweight, secure, and free script that automatically collect SKPORT daily check in rewards.
-Supports Arknights:Endfield. Support multiple accounts.
+A lightweight, secure, and free script that automatically collect SKPORT daily check in rewards.  
+Supports **Arknights:Endfield**. Support multiple accounts.
 
 ## Features
 * **Lightweight** - The script only requires minimal configuration and is only 90 lines of code.
