@@ -82,7 +82,7 @@ function autoSignFunction({
 function postWebhook(data) {
   let payload = JSON.stringify({
     'username': 'auto-sign',
-    'avatar_url': 'https://i.imgur.com/lqzjSf9.png',
+    'avatar_url': 'https://i.imgur.com/TguAOiA.png',
     'content': data
   });
 

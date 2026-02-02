@@ -6,6 +6,7 @@
 <p align="center">
     <img src="https://img.shields.io/github/license/canaria3406/skport-auto-sign?style=flat-square" alt="">
     <img src="https://img.shields.io/github/stars/canaria3406/skport-auto-sign?style=flat-square" alt="">
+    <br><a href="/README_zh-tw.md">繁體中文</a>　<b>English</b>
 </p>
 
 A lightweight, secure, and free script that automatically collect SKPORT daily check in rewards.  
@@ -15,7 +16,7 @@ Supports **Arknights:Endfield**. Support multiple accounts.
 * **Lightweight** - The script only requires minimal configuration and is only 90 lines of code.
 * **Secure** - The script can be self-deployed to Google Apps Script, no worries about data leaks.
 * **Free** - Google Apps Script is currently a free service.
-* **Simple** - The script can run without a browser and will automatically notify you through Discord or Telegram(future).
+* **Simple** - The script can run without a browser and will automatically notify you through Discord or Telegram.
 
 ## Setup
 1. Go to [Google Apps Script](https://script.google.com/home/start) and create a new project with your custom name.
@@ -67,7 +68,8 @@ const profiles = [
 
 2. **id**
 
-   Please enter your Arknights:Endfield game ID here. (must be number)
+   Please enter your Arknights:Endfield game ID here.  
+   (should be number)
 
 3. **server**
 
@@ -149,8 +151,10 @@ const telegramBotToken = "6XXXXXXXXX:AAAAAAAAAAXXXXXXXXXX8888888888Peko"
 </details>
 
 ## Demo
-If the auto check in process is success, it will send "OK".
-If you have already check in today, it will send "Traveler/Trailblazer/Captain, you've already checked in today"
+If the auto check in process is success, it will send "OK".  
+If you have already check in today, it will give a notify.
+
+![image](https://github.com/canaria3406/skport-auto-sign/blob/main/pic/01.png)
 
 ## Changelog
 2026-01-29 Project launched.
