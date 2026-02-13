@@ -157,5 +157,5 @@ If you have already check in today, it will give a notify.
 ![image](https://github.com/canaria3406/skport-auto-sign/blob/main/pic/01.png)
 
 ## Changelog
-2026-01-29 Project launched.
+2026-01-29 Project launched.  
 2026-02-14 Bug fixed. Thanks to Keit(@keit32) for the help.
