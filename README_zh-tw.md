@@ -46,7 +46,8 @@ const profiles = [
 <details>
 <summary><b>SKPORT 設定</b></summary>
 
-1. **SK_OAUTH_CRED_KEY** - 請填入SKPORT簽到頁面的cred
+1. **SK_OAUTH_CRED_KEY** - 請填入SKPORT簽到頁面的cred  
+2. **SK_TOKEN_CACHE_KEY** - 請填入SKPORT簽到頁面的token  
 
    進入[SKPORT簽到頁面](https://game.skport.com/endfield/sign-in)後，按F12進入console，
    貼上以下程式碼後執行即可取得cred，複製cred並填入"括號內"。
@@ -64,20 +65,32 @@ const profiles = [
 
    let ask = confirm(cred + '\n\nPress enter, then paste the token into your Google Apps Script Project');
    let msg = ask ? cred : 'Cancel';
+   console.log('SK_OAUTH_CRED_KEY:');
+   console.log(msg);
+
+   let token = 'Error';
+   if (localStorage.getItem('SK_TOKEN_CACHE_KEY')) {
+   token = localStorage.getItem('SK_TOKEN_CACHE_KEY');
+   }
+
+   let ask2 = confirm(token + '\n\nPress enter, then paste the token into your Google Apps Script Project');
+   let msg2 = ask2 ? token : 'Cancel';
+   console.log('SK_TOKEN_CACHE_KEY:');
+   console.log(msg2);
    ```
 
-2. **id**
+3. **id**
 
    請在此輸入您的明日方舟：終末地遊戲ID。
    (應為數字)
 
-3. **server**
+4. **server**
 
    請在此輸入您的明日方舟：終末地遊戲伺服器。
    若您在亞洲伺服器，請輸入 `2`，
    若您在美洲/歐洲伺服器，請輸入 `3`。
 
-4. **language**
+5. **language**
 
    請在此輸入您的明日方舟：終末地遊戲語言。
    若您使用英文，請輸入 `en`，
@@ -87,7 +100,7 @@ const profiles = [
    若您使用韓文，請輸入 `ko`，
    若您使用俄文，請輸入 `ru_RU`。
 
-5. **accountName** - 請輸入您的自訂暱稱
+6. **accountName** - 請輸入您的自訂暱稱
 
    請在此輸入您的自訂SKPORT或遊戲內暱稱。
 

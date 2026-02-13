@@ -47,7 +47,8 @@ const profiles = [
 <details>
 <summary><b>SKPORT settings</b></summary>
 
-1. **SK_OAUTH_CRED_KEY** - Please enter the cred for SKPORT check-in page.
+1. **SK_OAUTH_CRED_KEY** - Please enter the cred for SKPORT check-in page.  
+2. **SK_TOKEN_CACHE_KEY** -  Please enter the token for SKPORT check-in page.  
 
    After entering the [SKPORT check-in page](https://game.skport.com/endfield/sign-in), press F12 to enter the console.
    Paste the following code and run it to get the cred. Copy the cred and fill it in "quotes".
@@ -65,20 +66,32 @@ const profiles = [
 
    let ask = confirm(cred + '\n\nPress enter, then paste the token into your Google Apps Script Project');
    let msg = ask ? cred : 'Cancel';
+   console.log('SK_OAUTH_CRED_KEY:');
+   console.log(msg);
+
+   let token = 'Error';
+   if (localStorage.getItem('SK_TOKEN_CACHE_KEY')) {
+   token = localStorage.getItem('SK_TOKEN_CACHE_KEY');
+   }
+
+   let ask2 = confirm(token + '\n\nPress enter, then paste the token into your Google Apps Script Project');
+   let msg2 = ask2 ? token : 'Cancel';
+   console.log('SK_TOKEN_CACHE_KEY:');
+   console.log(msg2);
    ```
 
-2. **id**
+3. **id**
 
    Please enter your Arknights:Endfield game ID here.  
    (should be number)
 
-3. **server**
+4. **server**
 
    Please enter your Arknights:Endfield game server here.  
    If you're in Asia server, please enter `2`,  
    If you're in Americas/Europe server, please enter `3`.
 
-4. **language**
+5. **language**
 
    Please enter your Arknights:Endfield game language here.  
    If you're using english, please enter `en`,  
@@ -88,7 +101,7 @@ const profiles = [
    If you're using 한국어, please enter `ko`,  
    If you're using Русский, please enter `ru_RU`.
 
-5. **accountName** - Please enter your customized nickname.
+6. **accountName** - Please enter your customized nickname.
 
    Please enter your customized SKPORT or in-game nickname here.
 
