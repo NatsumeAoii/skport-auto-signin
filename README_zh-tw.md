@@ -20,7 +20,7 @@ skport自動簽到script，每月約可自動領取260石，堪比蚊子腿。
 
 ## 配置
 1. 進入[Google Apps Script](https://script.google.com/home/start)，新增專案，名稱可自訂。
-2. 選擇編輯器，貼上程式碼( [Discord版](https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-discord.gs) / ~~Telegram版~~ )，並參考下述說明配置config檔，完成後儲存。
+2. 選擇編輯器，貼上程式碼( [Discord版](https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-discord.gs) / [Telegram版](https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-telegram.gs) )，並參考下述說明配置config檔，完成後儲存。
 3. 在上方選擇main、點選上方的[**執行**]，並授予權限，確認配置是否正確(開始執行>執行完畢)。
 4. 在左側選擇觸發條件，新增觸發條件
    選擇您要執行的功能: main
