@@ -40,12 +40,20 @@ const headerDict = {
 }
 
 function bytesToHex(bytes) {
-  return bytes.map(b => (b < 0 ? b + 256 : b).toString(16).padStart(2, '0')).join('');
+  return Array.from(bytes).map(b => (b < 0 ? b + 256 : b).toString(16).padStart(2, '0')).join('');
 }
 
-function generateSign(path, timestamp, token) {
-  const headerObj = { platform: "3", timestamp, dId: "", vName: "1.0.0" };
-  const stringToSign = path + timestamp + JSON.stringify(headerObj);
+function generateSign(path, method, headers, query, body, token) {
+  let stringToSign = path + (method === "GET" ? (query || "") : (body || ""));
+  if (headers.timestamp) stringToSign += headers.timestamp.toString();
+  
+  const headerObj = {};
+  ["platform", "timestamp", "dId", "vName"].forEach(key => {
+    if (headers[key]) headerObj[key] = headers[key];
+    else if (key === "dId") headerObj[key] = "";
+  });
+  stringToSign += JSON.stringify(headerObj);
+  
   const hmacHex = bytesToHex(Utilities.computeHmacSha256Signature(stringToSign, token));
   return bytesToHex(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, hmacHex));
 }
@@ -65,7 +73,7 @@ function discordPing() {
 function autoSignFunction({ SK_OAUTH_CRED_KEY, SK_TOKEN_CACHE_KEY, id, server, language = "en", accountName }) {
   const path = "/web/v1/game/endfield/attendance";
   const timestamp = String(Math.floor(Date.now() / 1000));
-  const sign = generateSign(path, timestamp, SK_TOKEN_CACHE_KEY);
+  const sign = generateSign(path, 'POST', headers, '', '', SK_TOKEN_CACHE_KEY);
 
   const headers = {
     ...headerDict.default,
@@ -75,7 +83,7 @@ function autoSignFunction({ SK_OAUTH_CRED_KEY, SK_TOKEN_CACHE_KEY, id, server, l
     timestamp,
     sign
   };
-
+  
   const httpResponse = UrlFetchApp.fetch(urlDict.Endfield, { method: 'POST', headers, muteHttpExceptions: true });
   const responseJson = JSON.parse(httpResponse.getContentText());
 
