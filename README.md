@@ -6,7 +6,7 @@
 <p align="center">
     <img src="https://img.shields.io/github/license/canaria3406/skport-auto-sign?style=flat-square" alt="">
     <img src="https://img.shields.io/github/stars/canaria3406/skport-auto-sign?style=flat-square" alt="">
-    <br><a href="/README_zh-tw.md">繁體中文</a>　<b>English</b> <a href="/README_ru.md">Русский</a>
+    <br><a href="/README_zh-tw.md">繁體中文</a>　<b>English</b>　<a href="/README_ru.md">Русский</a>
 </p>
 
 A lightweight, secure, and free script that automatically collect SKPORT daily check in rewards.  

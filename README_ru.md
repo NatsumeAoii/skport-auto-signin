@@ -6,7 +6,7 @@
 <p align="center">
     <img src="https://img.shields.io/github/license/canaria3406/skport-auto-sign?style=flat-square" alt="">
     <img src="https://img.shields.io/github/stars/canaria3406/skport-auto-sign?style=flat-square" alt="">
-    <br><a href="/README_zh-tw.md">繁體中文</a>　<a href="/README.md">English</a> <b>Русский</b>
+    <br><a href="/README_zh-tw.md">繁體中文</a>　<a href="/README.md">English</a>　<b>Русский</b>
 </p>
 
 Легковесный, безопасный и бесплатный скрипт для автоматического получения ежедневных наград SKPORT.  
