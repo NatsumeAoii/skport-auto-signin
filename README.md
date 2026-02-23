@@ -4,8 +4,8 @@
 </h1>
 
 <p align="center">
-    <img src="https://img.shields.io/github/license/NatsumeAoii/skport-auto-sign?style=flat-square" alt="">
-    <img src="https://img.shields.io/github/stars/NatsumeAoii/skport-auto-sign?style=flat-square" alt="">
+    <img src="https://img.shields.io/github/license/NatsumeAoii/skport-auto-signin?style=flat-square" alt="">
+    <img src="https://img.shields.io/github/stars/NatsumeAoii/skport-auto-signin?style=flat-square" alt="">
     <br><a href="/README_zh-tw.md">繁體中文</a>　<b>English</b>　<a href="/README_ru.md">Русский</a>
 </p>
 
