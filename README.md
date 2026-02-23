@@ -9,25 +9,34 @@
     <br><a href="/README_zh-tw.md">繁體中文</a>　<b>English</b>　<a href="/README_ru.md">Русский</a>
 </p>
 
-A lightweight, secure, and free script that automatically collect SKPORT daily check in rewards.  
+A stable, secure, and free script that automatically collect SKPORT daily check in rewards.  
 Supports **Arknights:Endfield**. Support multiple accounts.
 
 ## Features
-* **Lightweight** - The script only requires minimal configuration and is only 90 lines of code.
+* **Stable** - The script only requires minimal configuration and is only 90 lines of code.
 * **Secure** - The script can be self-deployed to Google Apps Script, no worries about data leaks.
 * **Free** - Google Apps Script is currently a free service.
 * **Simple** - The script can run without a browser and will automatically notify you through Discord or Telegram.
 
 ## Setup
 1. Go to [Google Apps Script](https://script.google.com/home/start) and create a new project with your custom name.
-2. Select the editor and paste the code( [Discord version](https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-discord.gs) / [Telegram version](https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-telegram.gs) ). Refer to the instructions below to configure the config file and save it.
+2. Select the editor and paste the code( [main-disc-tele.gs](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/src/main-disc-tele.gs) ). Refer to the instructions below to configure the config file and save it.
 3. Select "main" and click the "Run" button at the top.
    Grant the necessary permissions and confirm that the configuration is correct (Execution started > completed).
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/02.png)
+
 4. Click the trigger button on the left side and add a new trigger.
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/03.png)
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/04.png)
+
    Select the function to run: main
    Select the event source: Time-driven
    Select the type of time based trigger: Day timer
    Select the time of day: recommended to choose any off-peak time between 0900 to 1500.
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/05.png)
 
 ## Configuration
 
@@ -35,22 +44,37 @@ Supports **Arknights:Endfield**. Support multiple accounts.
 const profiles = [
   {
     SK_OAUTH_CRED_KEY: "", // your skport SK_OAUTH_CRED_KEY in cookie
-    SK_TOKEN_CACHE_KEY: "", // your SK_TOKEN_CACHE_KEY in localStorage
+    SK_TOKEN_CACHE_KEY: "", // [OPTIONAL] Leave blank! The script auto-acquires this.
     id: "", // your Endfield game id
     server: "2", // Asia=2 Americas/Europe=3
     language: "en", // english=en 日本語=ja 繁體中文=zh_Hant 简体中文=zh_Hans 한국어=ko Русский=ru_RU
     accountName: "YOUR NICKNAME"
   }
 ];
+
+// Discord notification config
+const discord_notify = true;
+const myDiscordID = ""; 
+const discordWebhook = "";
+
+// Telegram notification config
+const telegram_notify = false;
+const myTelegramID = "";
+const telegramBotToken = "";
+
+// Display config
+const botDisplayName = "Arknights Endfield Auto Sign-In";
+const botAvatarUrl = "https://i.imgur.com/TguAOiA.png";
+const embedTitle = "Endfield Daily Check-In";
 ```
 
 <details>
 <summary><b>SKPORT settings</b></summary>
 
 1. **SK_OAUTH_CRED_KEY** - Please enter the cred for SKPORT check-in page.  
-2. **SK_TOKEN_CACHE_KEY** -  Please enter the token for SKPORT check-in page.  
+2. **SK_TOKEN_CACHE_KEY** - (Optional) **Leave this blank!** The script now automatically acquires and refreshes this token behind the scenes using your `SK_OAUTH_CRED_KEY`.  
 
-   After entering the [SKPORT check-in page](https://game.skport.com/endfield/sign-in), press F12 to enter the console.
+   To get your credentials, enter the [SKPORT check-in page](https://game.skport.com/endfield/sign-in), press F12 to enter the console.
    Paste the following code and run it to get the cred. Copy the cred and fill it in "quotes".
    ```javascript
    function getCookie(name) {
@@ -108,7 +132,7 @@ const profiles = [
 </details>
 
 <details>
-<summary><b>discord notify settings (only for <a href="https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-discord.gs">Discord version</a>)</b></summary>
+<summary><b>Discord notify settings</b></summary>
 
 ```javascript
 const discord_notify = true
@@ -137,7 +161,7 @@ const discordWebhook = "https://discord.com/api/webhooks/1050000000000000060/6aX
 </details>
 
 <details>
-<summary><b>telegram notify settings (only for <a href="https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-telegram.gs">Telegram version</a>)</b></summary>
+<summary><b>Telegram notify settings</b></summary>
 
 ```javascript
 const telegram_notify = true
@@ -168,8 +192,12 @@ const telegramBotToken = "6XXXXXXXXX:AAAAAAAAAAXXXXXXXXXX8888888888Peko"
 If the auto check in process is success, it will send "OK".  
 If you have already check in today, it will give a notify.
 
-![image](https://github.com/canaria3406/skport-auto-sign/blob/main/pic/01.png)
+![image](https://github.com/NatsumeAoii/skport-auto-singin/blob/main/pic/01.png)
 
 ## Changelog
 2026-01-29 Project launched.  
-2026-02-14 Bug fixed. Thanks to Keit(@keit32) for the help.
+2026-02-14 Bug fixed. Thanks to Keit(@keit32) for the help.  
+2026-02-23 Massive Overhaul: Unified Discord & Telegram into `main-disc-tele.gs`, implemented Rich Embeds/HTML formatting, added automatic `SK_TOKEN_CACHE_KEY` acquisition & refresh, and localized timestamps.
+
+## Credits
+* **[canaria](https://github.com/canaria3406)** - The original author and creator of the Skport Auto Sign-In script.

@@ -1,32 +1,41 @@
 <h1 align="center">
     <img width="120" height="120" src="pic/logo.svg" alt=""><br>
-    skport-auto-sign
+    skport-auto-signin
 </h1>
 
 <p align="center">
-    <img src="https://img.shields.io/github/license/canaria3406/skport-auto-sign?style=flat-square" alt="">
-    <img src="https://img.shields.io/github/stars/canaria3406/skport-auto-sign?style=flat-square" alt="">
+    <img src="https://img.shields.io/github/license/NatsumeAoii/skport-auto-signin?style=flat-square" alt="">
+    <img src="https://img.shields.io/github/stars/NatsumeAoii/skport-auto-signin?style=flat-square" alt="">
     <br><b>繁體中文</b>　<a href="/README.md">English</a>　<a href="/README_ru.md">Русский</a>
 </p>
 
-skport自動簽到script，每月約可自動領取260石，堪比蚊子腿。  
+穩定且免費的 skport自動簽到script，每月約可自動領取260石，堪比蚊子腿。  
 支援 明日方舟：終末地 。支援多帳號。
 
 ## 特色
-* **輕巧** - 僅需少量的設定即可運作，程式碼僅90行
+* **穩定** - 僅需少量的設定即可運作，程式碼僅90行
 * **安全** - 自行部屬至Google Apps Script，不必擔心資料外洩的問題
 * **免費** - Google Apps Script目前是免費使用的佛心服務
 * **簡單** - 無須電腦瀏覽器即可自動幫你簽到，並由 Discord 或 Telegram 自動通知
 
 ## 配置
 1. 進入[Google Apps Script](https://script.google.com/home/start)，新增專案，名稱可自訂。
-2. 選擇編輯器，貼上程式碼( [Discord版](https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-discord.gs) / [Telegram版](https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-telegram.gs) )，並參考下述說明配置config檔，完成後儲存。
-3. 在上方選擇main、點選上方的[**執行**]，並授予權限，確認配置是否正確(開始執行>執行完畢)。
+2. 選擇編輯器，貼上程式碼( [main-disc-tele.gs](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/src/main-disc-tele.gs) )，並參考下述說明配置config檔，完成後儲存。
+3. 在上方選擇 "main"、點選上方的[**執行**]，並授予權限，確認配置是否正確(開始執行>執行完畢)。
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/02.png)
+
 4. 在左側選擇觸發條件，新增觸發條件
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/03.png)
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/04.png)
+
    選擇您要執行的功能: main
    選取活動來源: 時間驅動
    選取時間型觸發條件類型: 日計時器
    選取時段: 自行選擇，建議選擇0900~1500之離峰任意時段
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/05.png)
 
 ## config檔設定
 
@@ -34,22 +43,37 @@ skport自動簽到script，每月約可自動領取260石，堪比蚊子腿。
 const profiles = [
   {
     SK_OAUTH_CRED_KEY: "", // your skport SK_OAUTH_CRED_KEY in cookie
-    SK_TOKEN_CACHE_KEY: "", // your SK_TOKEN_CACHE_KEY in localStorage
+    SK_TOKEN_CACHE_KEY: "", // [選填] 請保持空白！程式將自動獲取並更新此 Token。
     id: "", // your Endfield game id
     server: "2", // Asia=2 Americas/Europe=3
     language: "en", // english=en 日本語=ja 繁體中文=zh_Hant 简体中文=zh_Hans 한국어=ko Русский=ru_RU
     accountName: "YOUR NICKNAME"
   }
 ];
+
+// Discord notification config
+const discord_notify = true;
+const myDiscordID = "";
+const discordWebhook = "";
+
+// Telegram notification config
+const telegram_notify = false;
+const myTelegramID = "";
+const telegramBotToken = "";
+
+// Display config
+const botDisplayName = "Arknights Endfield Auto Sign-In";
+const botAvatarUrl = "https://i.imgur.com/TguAOiA.png";
+const embedTitle = "Endfield Daily Check-In";
 ```
 
 <details>
 <summary><b>SKPORT 設定</b></summary>
 
-1. **SK_OAUTH_CRED_KEY** - 請填入SKPORT簽到頁面的cred  
-2. **SK_TOKEN_CACHE_KEY** - 請填入SKPORT簽到頁面的token  
+1. **SK_OAUTH_CRED_KEY** - 請填入SKPORT簽到頁面的 cred  
+2. **SK_TOKEN_CACHE_KEY** - [選填] **請保持空白！** 程式現在會使用您的 `SK_OAUTH_CRED_KEY` 在背景自動獲取並刷新此 Token。  
 
-   進入[SKPORT簽到頁面](https://game.skport.com/endfield/sign-in)後，按F12進入console，
+   欲取得授權密碼，請進入[SKPORT簽到頁面](https://game.skport.com/endfield/sign-in)後，按F12進入console，
    貼上以下程式碼後執行即可取得cred，複製cred並填入"括號內"。
    ```javascript
    function getCookie(name) {
@@ -107,7 +131,7 @@ const profiles = [
 </details>
 
 <details>
-<summary><b>discord 通知設定 (適用於 <a href="https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-discord.gs">Discord版</a>)</b></summary>
+<summary><b>Discord 通知設定</b></summary>
 
 ```javascript
 const discord_notify = true
@@ -136,7 +160,7 @@ const discordWebhook = "https://discord.com/api/webhooks/1050000000000000060/6aX
 </details>
 
 <details>
-<summary><b>telegram 通知設定 (適用於 <a href="https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-telegram.gs">Telegram版</a>)</b></summary>
+<summary><b>Telegram 通知設定</b></summary>
 
 ```javascript
 const telegram_notify = true
@@ -166,8 +190,12 @@ const telegramBotToken = "6XXXXXXXXX:AAAAAAAAAAXXXXXXXXXX8888888888Peko"
 若自動簽到完成，則傳送 OK  
 若今天已簽到過，則傳送通知。
 
-![image](https://github.com/canaria3406/skport-auto-sign/blob/main/pic/01.png)
+![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/01.png)
 
 ## Changelog
 2026-01-29 專案公開  
-2026-02-14 修正錯誤，感謝 Keit(@keit32) 的協助
+2026-02-14 修正錯誤，感謝 Keit(@keit32) 的協助  
+2026-02-23 重大更新：將 Discord 與 Telegram 合併至單一 `main.gs`，實裝 Rich Embed/HTML 格式，新增 `SK_TOKEN_CACHE_KEY` 自動獲取與刷新機制，並支援自動時區轉換。
+
+## 鳴謝
+* **[canaria](https://github.com/canaria3406)** - Skport Auto Sign-In 腳本的原作者。

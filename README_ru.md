@@ -1,22 +1,22 @@
 <h1 align="center">
     <img width="120" height="120" src="pic/logo.svg" alt=""><br>
-    skport-auto-sign
+    skport-auto-signin
 </h1>
 
 <p align="center">
-    <img src="https://img.shields.io/github/license/canaria3406/skport-auto-sign?style=flat-square" alt="">
-    <img src="https://img.shields.io/github/stars/canaria3406/skport-auto-sign?style=flat-square" alt="">
+    <img src="https://img.shields.io/github/license/NatsumeAoii/skport-auto-signin?style=flat-square" alt="">
+    <img src="https://img.shields.io/github/stars/NatsumeAoii/skport-auto-signin?style=flat-square" alt="">
     <br><a href="/README_zh-tw.md">繁體中文</a>　<a href="/README.md">English</a>　<b>Русский</b>
 </p>
 
-Легковесный, безопасный и бесплатный скрипт для автоматического получения ежедневных наград SKPORT.  
+Стабильный, безопасный и бесплатный скрипт для автоматического получения ежедневных наград SKPORT.  
 Поддерживает **Arknights: Endfield**. Поддерживает несколько учетных записей.
 
 ---
 
 ## Возможности
 
-* **Легковесность** — скрипт требует минимальной настройки и состоит всего из 90 строк кода.
+* **Стабильность** — скрипт требует минимальной настройки и состоит всего из 90 строк кода.
 * **Безопасность** — скрипт можно самостоятельно развернуть в Google Apps Script без риска утечки данных.
 * **Бесплатность** — Google Apps Script является бесплатным сервисом.
 * **Простота** — скрипт может работать без браузера и автоматически отправлять уведомления через Discord или Telegram.
@@ -26,17 +26,24 @@
 ## Установка
 
 1. Перейдите в https://script.google.com/home/start и создайте новый проект, задав ему произвольное имя.
-2. Откройте редактор и вставьте код  
-   (Discord версия: https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-discord.gs  
-   Telegram версия: https://github.com/canaria3406/skport-auto-sign/blob/main/src/main-telegram.gs).  
+2. Откройте редактор и вставьте код( [main-disc-tele.gs](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/src/main-disc-tele.gs) ).  
    Затем настройте конфигурацию согласно инструкции ниже и сохраните проект.
 3. Выберите функцию `main` и нажмите кнопку **Run** в верхней части страницы.  
    Предоставьте необходимые разрешения и убедитесь, что выполнение завершилось успешно (Execution started → completed).
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/02.png)
+
 4. Перейдите в раздел **Triggers** слева и добавьте новый триггер:
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/03.png)
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/04.png)
+
    - Функция для запуска: `main`
    - Источник события: по времени
    - Тип триггера: ежедневно
    - Время выполнения: рекомендуется выбрать любое непиковое время с 09:00 до 15:00.
+
+   ![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/05.png)
 
 ---
 
@@ -46,20 +53,35 @@
 const profiles = [
   {
     SK_OAUTH_CRED_KEY: "", // ваш SK_OAUTH_CRED_KEY в cookie
-    SK_TOKEN_CACHE_KEY: "", // ваш SK_TOKEN_CACHE_KEY в localStorage
+    SK_TOKEN_CACHE_KEY: "", // [НЕОБЯЗАТЕЛЬНО] Оставьте пустым! Скрипт получает его автоматически.
     id: "", // ваш игровой ID в Arknights: Endfield
     server: "3", // Азия=2 Америка/Европа=3
     language: "ru_RU", // english=en 日本語=ja 繁體中文=zh_Hant 简体中文=zh_Hans 한국어=ko Русский=ru_RU
     accountName: "ВАШ НИК"
   }
 ];
+
+// Настройки уведомлений Discord
+const discord_notify = true;
+const myDiscordID = ""; 
+const discordWebhook = "";
+
+// Настройки уведомлений Telegram
+const telegram_notify = false;
+const myTelegramID = "";
+const telegramBotToken = "";
+
+// Настройки отображения
+const botDisplayName = "Arknights Endfield Auto Sign-In";
+const botAvatarUrl = "https://i.imgur.com/TguAOiA.png";
+const embedTitle = "Endfield Daily Check-In";
 ```
 
 <details>
 <summary><b>Настройки SKPORT</b></summary>
 
 1. **SK_OAUTH_CRED_KEY** — введите данные страницы ежедневных наград SKPORT.  
-2. **SK_TOKEN_CACHE_KEY** — введите токен страницы ежедневных наград SKPORT.  
+2. **SK_TOKEN_CACHE_KEY** — (Необязательно) **Оставьте это поле пустым!** Скрипт теперь автоматически получает и обновляет этот токен в фоновом режиме, используя ваш `SK_OAUTH_CRED_KEY`.  
 
 После входа на страницу https://game.skport.com/endfield/sign-in  
 нажмите F12, чтобы открыть консоль разработчика.
@@ -119,7 +141,7 @@ console.log(msg2);
 ---
 
 <details>
-<summary><b>Настройки уведомлений Discord (только для Discord версии)</b></summary>
+<summary><b>Настройки уведомлений Discord</b></summary>
 
 ```javascript
 const discord_notify = true
@@ -144,7 +166,7 @@ const discordWebhook = "https://discord.com/api/webhooks/..."
 ---
 
 <details>
-<summary><b>Настройки уведомлений Telegram (только для Telegram версии)</b></summary>
+<summary><b>Настройки уведомлений Telegram</b></summary>
 
 ```javascript
 const telegram_notify = true
@@ -172,7 +194,7 @@ const telegramBotToken = "6XXXXXXXXX:AAAAAAAAAAXXXXXXXXXX8888888888Peko"
 Если процесс автоматического сбора ежедневных наград прошёл успешно — будет отправлено сообщение `"OK"`.  
 Если награды уже были получены сегодня, вы получите соответствующее уведомление.
 
-![image](https://github.com/canaria3406/skport-auto-sign/blob/main/pic/01.png)
+![image](https://github.com/NatsumeAoii/skport-auto-signin/blob/main/pic/01.png)
 
 ---
 
@@ -180,3 +202,7 @@ const telegramBotToken = "6XXXXXXXXX:AAAAAAAAAAXXXXXXXXXX8888888888Peko"
 
 2026-01-29 — Проект запущен.  
 2026-02-14 — Исправлен баг. Спасибо Keit (@keit32) за помощь.
+2026-02-23 — Масштабное обновление: Объединены Discord и Telegram в `main.gs`, внедрено форматирование Rich Embeds/HTML, добавлено автоматическое получение и обновление `SK_TOKEN_CACHE_KEY`, а также локализованы временные метки.
+
+## Благодарности
+* **[canaria](https://github.com/canaria3406)** - Автор и создатель оригинального скрипта Skport Auto Sign-In.
